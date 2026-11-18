@@ -4,6 +4,8 @@ import { mensagemDe } from '../api/mensagem'
 import { criarCurso, listarCursos, perfil } from '../api/parceira'
 import { CATEGORIAS, NIVEIS, SITUACOES, type Categoria, type Nivel } from '../api/tipos'
 import { useDados } from '../hooks/useDados'
+import Esqueleto from '../componentes/Esqueleto'
+import EstadoVazio from '../componentes/EstadoVazio'
 
 export default function Cursos() {
   const navegar = useNavigate()
@@ -82,9 +84,10 @@ export default function Cursos() {
       )}
 
       {cursos.erro && <p className="erro" role="alert">{cursos.erro}</p>}
-      {cursos.carregando && <p className="mudo">Carregando...</p>}
+      {cursos.carregando && <Esqueleto />}
       {cursos.dados && cursos.dados.length === 0 && (
-        <p className="mudo">Você ainda não tem cursos. Crie o primeiro com o botão "Novo curso".</p>
+        <EstadoVazio icone="livro" titulo="Nenhum curso ainda"
+          texto="Crie o primeiro curso, adicione módulos e aulas e envie para a revisão da nossa equipe." />
       )}
 
       <div className="lista">

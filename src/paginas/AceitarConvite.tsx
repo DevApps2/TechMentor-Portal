@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { ErroDaApi } from '../api/cliente'
 import { aceitarConvite, buscarTermos } from '../api/convite'
 import type { Termos } from '../api/tipos'
+import TelaDeEntrada from '../componentes/TelaDeEntrada'
 
 export default function AceitarConvite() {
     const [params, setParams] = useSearchParams()
@@ -69,7 +70,7 @@ export default function AceitarConvite() {
 
     if (concluido) {
         return (
-            <main className="centro">
+            <TelaDeEntrada>
                 <div className="cartao">
                     <h1>Convite aceito!</h1>
                     <p>
@@ -78,12 +79,12 @@ export default function AceitarConvite() {
                     </p>
                     <Link className="botao" to="/entrar">Ir para o login</Link>
                 </div>
-            </main>
+            </TelaDeEntrada>
         )
     }
 
     return (
-        <main className="centro">
+        <TelaDeEntrada>
             <form className="cartao" onSubmit={enviar}>
                 <h1>Criar minha senha</h1>
                 <p className="mudo">Use o código que enviamos por e-mail para ativar o acesso da sua instituição.</p>
@@ -130,6 +131,6 @@ export default function AceitarConvite() {
                 <button type="submit" disabled={enviando || !termos}>{enviando ? 'Criando...' : 'Criar senha e aceitar'}</button>
                 <p className="mudo">Já tem senha? <Link to="/entrar">Entrar</Link></p>
             </form>
-        </main>
+        </TelaDeEntrada>
     )
 }

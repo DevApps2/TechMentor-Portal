@@ -2,13 +2,20 @@ import { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { listarNotificacoes } from '../api/parceira'
 import { useSessao } from '../contexto/sessaoContexto'
+import Icone, { type NomeDoIcone } from './Icone'
+import Logo from './Logo'
 
 /** Evento que as telas disparam quando leem notificações, para o número do menu atualizar na hora. */
 export const NOTIFICACOES_MUDARAM = 'notificacoes-mudaram'
 
-const classe = ({ isActive }: { isActive: boolean }) => (isActive ? 'ativo' : '')
+const ITENS: { para: string; rotulo: string; icone: NomeDoIcone; fim?: boolean }[] = [
+  { para: '/', rotulo: 'Início', icone: 'inicio', fim: true },
+  { para: '/cursos', rotulo: 'Cursos', icone: 'cursos' },
+  { para: '/metricas', rotulo: 'Números', icone: 'numeros' },
+  { para: '/notificacoes', rotulo: 'Avisos', icone: 'avisos' },
+]
 
-/** Moldura das telas logadas: menu no topo e a área da página embaixo. */
+/** Moldura das telas logadas: menu lateral (no celular vira uma faixa no topo) e a área da página. */
 export default function Layout() {
   const { usuario, sair } = useSessao()
   const [naoLidas, setNaoLidas] = useState(0)
@@ -36,22 +43,43 @@ export default function Layout() {
   }, [usuario])
 
   return (
-    <>
-      <header className="menu">
-        <strong className="marca">TechMentor <span>parceiras</span></strong>
-        <nav>
-          <NavLink to="/" end className={classe}>Início</NavLink>
-          <NavLink to="/cursos" className={classe}>Cursos</NavLink>
-          <NavLink to="/metricas" className={classe}>Números</NavLink>
-          <NavLink to="/notificacoes" className={classe}>
-            Avisos{naoLidas > 0 && <span className="contador">{naoLidas}</span>}
-          </NavLink>
+    <div className="app">
+      <aside className="lateral">
+        <div className="lateral-marca">
+          <Logo tamanho={38} />
+          <div>
+            <strong>TechMentor</strong>
+            <span>Parceiras</span>
+          </div>
+        </div>
+
+        <nav aria-label="Principal">
+          {ITENS.map((item) => (
+            <NavLink key={item.para} to={item.para} end={item.fim} className={({ isActive }) => (isActive ? 'ativo' : '')}>
+              <Icone nome={item.icone} />
+              <span>{item.rotulo}</span>
+              {item.para === '/notificacoes' && naoLidas > 0 && <span className="contador">{naoLidas}</span>}
+            </NavLink>
+          ))}
         </nav>
-        <button className="secundario" onClick={sair}>Sair</button>
-      </header>
-      <main className="pagina">
-        <Outlet />
+
+        <div className="lateral-usuario">
+          <span className="avatar" aria-hidden="true">{(usuario?.nome ?? '?').trim().charAt(0).toUpperCase()}</span>
+          <div className="lateral-nome">
+            <strong>{usuario?.nome}</strong>
+            <span>{usuario?.email}</span>
+          </div>
+          <button className="icone-botao" onClick={sair} aria-label="Sair" title="Sair">
+            <Icone nome="sair" />
+          </button>
+        </div>
+      </aside>
+
+      <main className="conteudo">
+        <div className="pagina">
+          <Outlet />
+        </div>
       </main>
-    </>
+    </div>
   )
 }

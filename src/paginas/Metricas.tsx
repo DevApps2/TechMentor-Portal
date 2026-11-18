@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { listarCursos, metricasDoCurso } from '../api/parceira'
 import { SITUACOES } from '../api/tipos'
 import { useDados } from '../hooks/useDados'
+import Esqueleto from '../componentes/Esqueleto'
+import EstadoVazio from '../componentes/EstadoVazio'
 
 export default function Metricas() {
   const cursos = useDados(listarCursos)
@@ -16,8 +18,10 @@ export default function Metricas() {
       <p className="mudo">Dados agregados. Nenhuma aluna é identificada.</p>
 
       {cursos.erro && <p className="erro" role="alert">{cursos.erro}</p>}
-      {cursos.carregando && <p className="mudo">Carregando...</p>}
-      {cursos.dados?.length === 0 && <p className="mudo">Você ainda não tem cursos.</p>}
+      {cursos.carregando && <Esqueleto linhas={2} />}
+      {cursos.dados?.length === 0 && (
+        <EstadoVazio icone="numeros" titulo="Ainda não há números" texto="Quando suas alunas começarem a estudar, os resultados aparecem aqui." />
+      )}
 
       {cursos.dados && cursos.dados.length > 0 && (
         <label className="seletor">
@@ -39,7 +43,7 @@ function NumerosDoCurso({ cursoId }: { cursoId: number }) {
   const metricas = useDados(() => metricasDoCurso(cursoId), [cursoId])
 
   if (metricas.erro) return <p className="erro" role="alert">{metricas.erro}</p>
-  if (!metricas.dados) return <p className="mudo">Carregando números...</p>
+  if (!metricas.dados) return <Esqueleto linhas={2} altura={90} />
 
   const m = metricas.dados
 

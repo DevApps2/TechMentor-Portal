@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { ErroDaApi } from '../api/cliente'
 import { useSessao } from '../contexto/sessaoContexto.ts'
+import TelaDeEntrada from '../componentes/TelaDeEntrada'
 
 export default function Login() {
     const { usuario, entrar } = useSessao()
@@ -29,10 +30,10 @@ export default function Login() {
     }
 
     return (
-        <main className="centro">
+        <TelaDeEntrada>
             <form className="cartao" onSubmit={enviar}>
-                <h1>TechMentor para parceiras</h1>
-                <p className="mudo">Entre para gerenciar os cursos da sua instituição.</p>
+                <h1>Entrar na sua conta</h1>
+                <p className="mudo">Gerencie os cursos da sua instituição no TechMentor.</p>
 
                 <label>
                     E-mail
@@ -51,6 +52,6 @@ export default function Login() {
                 <p className="mudo"><Link to="/esqueci-senha">Esqueci minha senha</Link></p>
         <p className="mudo">Recebeu um convite? <Link to="/convite">Criar minha senha</Link></p>
             </form>
-        </main>
+        </TelaDeEntrada>
     )
 }

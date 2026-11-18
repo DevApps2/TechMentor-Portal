@@ -5,6 +5,8 @@ import type { Notificacao } from '../api/tipos'
 import { NOTIFICACOES_MUDARAM } from '../componentes/Layout'
 import { useSessao } from '../contexto/sessaoContexto'
 import { useDados } from '../hooks/useDados'
+import Esqueleto from '../componentes/Esqueleto'
+import EstadoVazio from '../componentes/EstadoVazio'
 
 export default function Notificacoes() {
   const { usuario } = useSessao()
@@ -39,8 +41,10 @@ export default function Notificacoes() {
       </div>
 
       {lista.erro && <p className="erro" role="alert">{lista.erro}</p>}
-      {lista.carregando && <p className="mudo">Carregando...</p>}
-      {lista.dados?.length === 0 && <p className="mudo">Nenhum aviso por aqui.</p>}
+      {lista.carregando && <Esqueleto linhas={2} />}
+      {lista.dados?.length === 0 && (
+        <EstadoVazio icone="avisos" titulo="Nenhum aviso por aqui" texto="Quando a equipe responder sobre seus cursos ou sua conta, você verá aqui." />
+      )}
 
       <div className="lista">
         {lista.dados?.map((n) => (

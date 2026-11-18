@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { mensagemDe } from '../api/mensagem'
 import { pedirCodigoDeSenha, redefinirSenha } from '../api/parceira'
+import TelaDeEntrada from '../componentes/TelaDeEntrada'
 
 export default function EsqueciSenha() {
   const [etapa, setEtapa] = useState<'pedir' | 'redefinir' | 'pronto'>('pedir')
@@ -45,18 +46,18 @@ export default function EsqueciSenha() {
 
   if (etapa === 'pronto') {
     return (
-      <main className="centro">
+      <TelaDeEntrada>
         <div className="cartao">
           <h1>Senha alterada</h1>
           <p>Já pode entrar com a senha nova.</p>
           <Link className="botao" to="/entrar">Ir para o login</Link>
         </div>
-      </main>
+      </TelaDeEntrada>
     )
   }
 
   return (
-    <main className="centro">
+    <TelaDeEntrada>
       {etapa === 'pedir' ? (
         <form className="cartao" onSubmit={pedir}>
           <h1>Esqueci minha senha</h1>
@@ -86,6 +87,6 @@ export default function EsqueciSenha() {
           <p className="mudo">Não chegou? <button type="button" className="link" onClick={() => setEtapa('pedir')}>Pedir outro código</button></p>
         </form>
       )}
-    </main>
+    </TelaDeEntrada>
   )
 }

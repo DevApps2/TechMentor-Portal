@@ -27,6 +27,7 @@ import {
   type Nivel,
 } from '../api/tipos'
 import { useDados } from '../hooks/useDados'
+import Esqueleto from '../componentes/Esqueleto'
 
 type Executar = (acao: () => Promise<unknown>, sucesso?: string) => Promise<void>
 
@@ -58,7 +59,7 @@ export default function CursoEditar() {
   }
 
   if (curso.erro) return <p className="erro" role="alert">{curso.erro}</p>
-  if (!curso.dados) return <p className="mudo">Carregando...</p>
+  if (!curso.dados) return <Esqueleto linhas={3} altura={110} />
 
   const c = curso.dados
   // Em revisão ou arquivado a API recusa qualquer alteração; aqui a tela já esconde os botões.
