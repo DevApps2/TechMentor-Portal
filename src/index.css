@@ -35,3 +35,47 @@ a { color: var(--roxo-escuro); }
 label.marcar { flex-direction: row; align-items: flex-start; gap: 10px; font-weight: 500; }
 label.marcar input { margin-top: 3px; }
 .botao { display: inline-block; text-align: center; padding: 11px 16px; border-radius: 10px; background: var(--roxo); color: #fff; font-weight: 700; text-decoration: none; }
+/* ---- menu e telas logadas ---- */
+.menu { display: flex; align-items: center; gap: 24px; padding: 12px 20px; background: #fff; border-bottom: 1px solid var(--borda); position: sticky; top: 0; z-index: 5; }
+.marca { color: var(--roxo-escuro); }
+.marca span { color: var(--mudo); font-weight: 500; font-size: .85rem; }
+.menu nav { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
+.menu nav a { padding: 8px 12px; border-radius: 8px; text-decoration: none; color: var(--texto); font-weight: 600; }
+.menu nav a:hover { background: var(--fundo); }
+.menu nav a.ativo { background: #ede9fe; color: var(--roxo-escuro); }
+.contador { margin-left: 6px; background: var(--roxo); color: #fff; border-radius: 999px; padding: 1px 7px; font-size: .75rem; }
+.largo { max-width: none; }
+.linha { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
+.linha > * { flex: 1; min-width: 140px; }
+.lista { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+.item { flex-direction: row; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; }
+.item:hover { border-color: var(--roxo); }
+textarea, select { padding: 10px 12px; border: 1px solid var(--borda); border-radius: 10px; font-size: 1rem; font-family: inherit; background: #fff; }
+fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.aviso { background: #fff7e6; border: 1px solid #f5d9a6; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+.sucesso { background: #dcfce7; color: #15803d; border-radius: 10px; padding: 10px 14px; margin: 12px 0; }
+.selo-em_revisao { background: #e0e7ff; color: #3730a3; }
+.selo-publicado { background: #dcfce7; color: #15803d; }
+.selo-rascunho { background: #f1f0f5; color: #514c58; }
+.selo-arquivado { background: #fee2e2; color: #b91c1c; }
+.modulo { margin-top: 14px; }
+.modulo .topo { margin-bottom: 4px; flex-wrap: wrap; gap: 8px; }
+.aula { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--borda); flex-wrap: wrap; }
+.aula p { margin: 2px 0 0; }
+.formaula { display: flex; flex-direction: column; gap: 12px; padding: 12px; background: var(--fundo); border-radius: 12px; }
+.acoes { display: flex; gap: 6px; flex-wrap: wrap; }
+button.mini { padding: 5px 10px; font-size: .8rem; background: #fff; color: var(--roxo-escuro); border: 1px solid var(--borda); }
+button.mini:hover:not(:disabled) { background: #ede9fe; }
+button.perigo { color: var(--erro); }
+button.link { background: none; color: var(--roxo-escuro); padding: 0; font-size: inherit; font-weight: 600; text-decoration: underline; }
+.botao.claro { background: #fff; color: var(--roxo-escuro); border: 1px solid var(--roxo); }
+.historico { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.seletor { max-width: 420px; margin: 14px 0; }
+.numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 14px 0; }
+.numero { background: #fff; border: 1px solid var(--borda); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; }
+.numero strong { font-size: 1.6rem; color: var(--roxo-escuro); }
+.numero span { color: var(--mudo); font-size: .85rem; }
+.tabela { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--borda); border-radius: 12px; overflow: hidden; }
+.tabela th, .tabela td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--borda); }
+.aviso-item { flex-direction: column; align-items: flex-start; text-align: left; gap: 4px; color: var(--texto); font-weight: 500; }
+.aviso-item.nao-lida { border-color: var(--roxo); background: #faf7ff; }

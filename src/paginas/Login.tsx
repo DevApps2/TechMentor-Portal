@@ -48,7 +48,8 @@ export default function Login() {
 
                 <button type="submit" disabled={enviando}>{enviando ? 'Entrando...' : 'Entrar'}</button>
 
-                <p className="mudo">Recebeu um convite? <Link to="/convite">Criar minha senha</Link></p>
+                <p className="mudo"><Link to="/esqueci-senha">Esqueci minha senha</Link></p>
+        <p className="mudo">Recebeu um convite? <Link to="/convite">Criar minha senha</Link></p>
             </form>
         </main>
     )
